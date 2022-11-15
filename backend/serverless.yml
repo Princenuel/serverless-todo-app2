@@ -28,9 +28,9 @@ provider:
     TODOS_TABLE: Todos-${self:provider.stage}
     TODOS_CREATED_AT_INDEX: CreatedAtIndex
     USER_ID_INDEX: UserIdIndex
-    ATTACHMENT_S3_BUCKET: serverless-c4-todo-images-scalp222-${self:provider.stage}
+    ATTACHMENT_S3_BUCKET: serverless-c4-todo-images-kisuvilu1994-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
-    AUTH_0_SECRET_ID: Q3h0WGLCTUFkkxiLf40FORo5IQwKv6CVs6ChkWy-Hw2j6Z8uMcgioPtyem3PkuQA
+    AUTH_0_SECRET_ID: 093qpZJVB6foctpKwKlo3-ziR0O-TIT2BJClOMkLBEPT9YFytDMVwTppMV1wardz
 
 
 
@@ -137,7 +137,7 @@ functions:
     iamRoleStatements:
       - Effect: Allow
         Action:
-          - dynamodb:PutItem
+          - dynamodb:Query
           - dynamodb:UpdateItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
 
@@ -155,9 +155,13 @@ functions:
       - Effect: Allow
         Action:
           - dynamodb:DeleteItem
-          - dynamodb:GetItem
+          - dynamodb:Query
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
-
+      - Effect: Allow
+        Action:
+          - dynamodb:Query
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}/index/${self:provider.environment.TODOS_CREATED_AT_INDEX}
+        
   # TODO: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements
   GenerateUploadUrl:
@@ -176,6 +180,7 @@ functions:
         Resource: arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*
       - Effect: Allow
         Action:
+          - dynamodb:Query
           - dynamodb:UpdateItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
       - Effect: Allow
