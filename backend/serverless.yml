@@ -1,5 +1,5 @@
 # TODO: Change the name of the org
-org: kisuvilu
+org: evansmanyala
 app: serverless-todo-app
 service: serverless-todo-app
 
@@ -28,9 +28,9 @@ provider:
     TODOS_TABLE: Todos-${self:provider.stage}
     TODOS_CREATED_AT_INDEX: CreatedAtIndex
     USER_ID_INDEX: UserIdIndex
-    ATTACHMENT_S3_BUCKET: serverless-c4-todo-images-kisuvilu1994-${self:provider.stage}
+    ATTACHMENT_S3_BUCKET: serverless-c4-evansmanyala-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
-    AUTH_0_SECRET_ID: 093qpZJVB6foctpKwKlo3-ziR0O-TIT2BJClOMkLBEPT9YFytDMVwTppMV1wardz
+    AUTH_0_SECRET_ID: xaImMcFJ8aqWyccqJVoDIRfkvR50_8Lp-eXS24zspoRdESGzx51DEQg7DlEn8gRd
 
 
 
@@ -77,6 +77,7 @@ functions:
           path: todos
           cors: true
           authorizer: Auth
+          reqValidatorName: RequestBodyValidator
     iamRoleStatements:
       - Effect: Allow
         Action:
@@ -151,6 +152,7 @@ functions:
           path: todos/{todoId}
           cors: true
           authorizer: Auth
+          reqValidatorName: RequestBodyValidator
     iamRoleStatements:
       - Effect: Allow
         Action:
@@ -172,6 +174,7 @@ functions:
           path: todos/{todoId}/attachment
           cors: true
           authorizer: Auth
+          reqValidatorName: RequestBodyValidator
     iamRoleStatements:
       - Effect: Allow
         Action:
