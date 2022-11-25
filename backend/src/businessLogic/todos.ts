@@ -64,7 +64,7 @@ export async function deleteTodo(
     todoId,
     userId
   )
-
+  console.log(todoId, userId);
   logger.info('deleteTodo ' + JSON.stringify({
     result
   }))
