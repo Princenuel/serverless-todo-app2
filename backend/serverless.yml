@@ -1,5 +1,5 @@
 # TODO: Change the name of the org
-org: evansmanyala
+org: princenuel
 app: serverless-todo-app
 service: serverless-todo-app
 
@@ -28,11 +28,9 @@ provider:
     TODOS_TABLE: Todos-${self:provider.stage}
     TODOS_CREATED_AT_INDEX: CreatedAtIndex
     USER_ID_INDEX: UserIdIndex
-    ATTACHMENT_S3_BUCKET: serverless-c4-evansmanyala-${self:provider.stage}
+    ATTACHMENT_S3_BUCKET: serverless-c4-prince-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
-    AUTH_0_SECRET_ID: xaImMcFJ8aqWyccqJVoDIRfkvR50_8Lp-eXS24zspoRdESGzx51DEQg7DlEn8gRd
-
-
+    AUTH_0_SECRET_ID: 7gzXfPJplsmRdm-jU3AITG9B9-8PFlzYf2423X0_1mf1RpPiwM6Wu_COaA2E5IPf
 
   logs:
     # Enable API Gateway logs
@@ -52,7 +50,6 @@ custom:
       - name: UpdateTodoRequest
         contentType: application/json
         schema: ${file(models/update-todo-model.json)}
-
 
 functions:
   Auth:
@@ -84,8 +81,7 @@ functions:
             - xray:PutTelemetryRecords
             - xray:PutTraceSegments
         Resource: '*'
-
-
+        
   # TODO: Configure this function -
   # Provide iamRoleStatements property. Decide the Actions and AWS Resource.
   # To refer to an AWS resource defined in the "Resources" section, you can use "Resource: !GetAtt <resource-name>.Arn"
